@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Operations</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #343a40;
+            margin-top: 50px;
+        }
+
+        #operations-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        #operations-list li {
+            margin-bottom: 10px;
+        }
+
+        .operation-link {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+
+        .operation-link:hover {
+            background-color: #0056b3;
+        }
+
+        #appointment-table {
+            float: right;
+            margin-right: 50px;
+            width: 50%;
+        }
+
+        #appointment-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #appointment-table th, #appointment-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #back-link {
+            display: block;
+            margin-top: 30px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        #back-link:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Appointment Operations</h2>
+
+    <div id="appointment-table">
+        <h3>All Appointments</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Employee ID</th>
+                    <th>Patient ID</th>
+                </tr>
+            </thead>
+            <tbody id="appointments-body"></tbody>
+        </table>
+    </div>
+
+    <ul id="operations-list">
+        <li><a class="operation-link" href="{{ url_for('add_appointment') }}">Add Appointment</a></li>
+        <li><a class="operation-link" href="{{ url_for('delete_appointment') }}">Delete Appointment</a></li>
+        <li><a class="operation-link" href="{{ url_for('find_appointment') }}">Update Appointment</a></li>
+    </ul>
+
+    <a id="back-link" href="{{ url_for('index') }}">Back to Home Page</a>
+
+    <script>
+        // Fetch appointment data and update the table
+        async function fetchAndDisplayAppointments() {
+            const response = await fetch('/get_all_appointments');
+            const data = await response.json();
+
+            const appointmentsBody = document.getElementById('appointments-body');
+            appointmentsBody.innerHTML = '';
+
+            data.appointments.forEach(appointment => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${appointment.App_ID}</td>
+                    <td>${appointment.App_Date}</td>
+                    <td>${appointment.App_Type}</td>
+                    <td>${appointment.Emp_ID}</td>
+                    <td>${appointment.Pat_ID}</td>
+                `;
+                appointmentsBody.appendChild(row);
+            });
+        }
+
+        // Initial fetch and then refresh every 5 seconds
+        fetchAndDisplayAppointments();
+        setInterval(fetchAndDisplayAppointments, 5000);
+    </script>
+</body>
+</html>

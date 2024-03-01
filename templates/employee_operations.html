@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Operations</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #343a40;
+            margin-top: 50px;
+        }
+
+        #operations-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        #operations-list li {
+            margin-bottom: 10px;
+        }
+
+        .operation-link {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+
+        .operation-link:hover {
+            background-color: #0056b3;
+        }
+
+        #employee-table {
+            float: right;
+            margin-right: 50px;
+            width: 50%;
+        }
+
+        #employee-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #employee-table th, #employee-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #back-link {
+            display: block;
+            margin-top: 30px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        #back-link:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Employee Operations</h2>
+
+    <div id="employee-table">
+        <h3>All Employees</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Last Name</th>
+                    <th>Phone</th>
+                    <th>Gender</th>
+                    <th>DOB</th>
+                    <th>Role ID</th>
+                    <th>Address ID</th>
+                </tr>
+            </thead>
+            <tbody id="employees-body"></tbody>
+        </table>
+    </div>
+
+    <ul id="operations-list">
+        <li><a class="operation-link" href="{{ url_for('add_employee') }}">Add Employee</a></li>
+        <li><a class="operation-link" href="{{ url_for('delete_employee') }}">Delete Employee</a></li>
+        <li><a class="operation-link" href="{{ url_for('find_employee') }}">Update Employee</a></li>
+    </ul>
+
+    <a id="back-link" href="{{ url_for('index') }}">Back to Home Page</a>
+
+    <script>
+        // Fetch employee data and update the table
+        async function fetchAndDisplayEmployees() {
+            const response = await fetch('/get_all_employees');
+            const data = await response.json();
+
+            const employeesBody = document.getElementById('employees-body');
+            employeesBody.innerHTML = '';
+
+            data.employees.forEach(employee => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${employee.Emp_ID}</td>
+                    <td>${employee.Emp_Fname}</td>
+                    <td>${employee.Emp_Lname}</td>
+                    <td>${employee.Emp_Phone}</td>
+                    <td>${employee.Emp_Gender}</td>
+                    <td>${employee.Emp_DOB}</td>
+                    <td>${employee.Role_ID}</td>
+                    <td>${employee.Add_ID}</td>
+                `;
+                employeesBody.appendChild(row);
+            });
+        }
+
+        // Initial fetch and then refresh every 5 seconds
+        fetchAndDisplayEmployees();
+        setInterval(fetchAndDisplayEmployees, 5000);
+    </script>
+</body>
+</html>

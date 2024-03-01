@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Appointment</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h3 {
+            color: #343a40;
+            margin-top: 50px;
+        }
+
+        form {
+            display: inline-block;
+            margin: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h3>Current Appointment Information</h3>
+    <form method="post" action="{{ url_for('update_appointment') }}">
+        <label for="App_Date">Updated Date:</label>
+        <input type="text" name="App_Date" value="{{ app_data[app_id][1] }}" required>
+
+        <label for="App_Type">Updated Type:</label>
+        <input type="text" name="App_Type" value="{{ app_data[app_id][2] }}" required>
+
+        <label for="Emp_ID">Updated Employee ID:</label>
+        <input type="text" name="Emp_ID" value="{{ app_data[app_id][3] }}" required>
+
+        <input type="hidden" name="App_ID" value="{{ app_data[app_id][0] }}">
+        <input type="submit" value="Update Appointment">
+    </form>
+
+    <a href="{{ url_for('appointment_operations') }}">Back to Appointment Operations</a>
+    
+</body>
+</html>

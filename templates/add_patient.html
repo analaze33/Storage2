@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Patient</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #343a40;
+            margin-top: 50px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin: 10px 0;
+            color: #495057;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        #back-link {
+            display: block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        #back-link:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add New Patient</h1>
+
+    <form method="post">
+        <label for="Pat_ID">Patient ID:</label>
+        <input type="text" id="Pat_ID" name="Pat_ID" required>
+
+        <label for="Pat_Fname">Patient Name:</label>
+        <input type="text" id="Pat_Fname" name="Pat_Fname" required>
+
+        <label for="Pat_Lname">Patient LName:</label>
+        <input type="text" id="Pat_Lname" name="Pat_Lname" required>
+
+        <label for="Pat_Phone">Patient Phone:</label>
+        <input type="text" id="Pat_Phone" name="Pat_Phone" required>
+
+        <label for="Discharge_Date">Discharge Date:</label>
+        <input type="text" id="Discharge_Date" name="Discharge_Date" required>
+
+        <label for="Admission_Date">Admission Date:</label>
+        <input type="text" id="Admission_Date" name="Admission_Date" required>
+
+        <label for="Ward_No">Ward NO:</label>
+        <input type="text" id="Ward_No" name="Ward_No" required>
+
+        <label for="Pat_DOB">Patient DOB:</label>
+        <input type="text" id="Pat_DOB" name="Pat_DOB" required>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <a id="back-link" href="{{ url_for('patient_operations') }}">Back to Patient Operations</a>
+</body>
+</html>

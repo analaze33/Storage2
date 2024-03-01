@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients with Appointments</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #343a40;
+            margin-top: 50px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #dee2e6;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Patients with Appointments</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Patient ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Discharge Date</th>
+                <th>Admission Date</th>
+                <th>Ward No</th>
+                <th>DOB</th>
+                <th>Appointment ID</th>
+                <th>Appointment Date</th>
+                <th>Appointment Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patient_data %}
+            <tr>
+                <td>{{ patient.Pat_ID }}</td>
+                <td>{{ patient.Pat_Fname }}</td>
+                <td>{{ patient.Pat_Lname }}</td>
+                <td>{{ patient.Pat_Phone }}</td>
+                <td>{{ patient.Discharge_Date }}</td>
+                <td>{{ patient.Admission_Date }}</td>
+                <td>{{ patient.Ward_No }}</td>
+                <td>{{ patient.Pat_DOB }}</td>
+                <td>{{ patient.App_ID }}</td>
+                <td>{{ patient.App_Date }}</td>
+                <td>{{ patient.App_Type }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('index') }}">Back to Home Page</a>
+</body>
+</html>

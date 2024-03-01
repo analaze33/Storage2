@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Appointment</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #343a40;
+            margin-top: 50px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+
+        label {
+            margin: 10px;
+            color: #343a40;
+            font-size: 1.2em;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+            width: 300px;
+            font-size: 1em;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 1.2em;
+            margin-top: 20px;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Add New Appointment</h2>
+
+    <form method="post" action="{{ url_for('add_appointment') }}">
+        <label for="Appointment_ID">Appointment ID:</label>
+        <input type="text" name="Appointment_ID" required>
+        
+        <label for="App_Date">Appointment Date:</label>
+        <input type="text" name="App_Date" required>
+        
+        <label for="App_Type">Appointment Type:</label>
+        <input type="text" name="App_Type" required>
+        
+        <label for="Emp_ID">Employee ID:</label>
+        <input type="text" name="Emp_ID" required>
+        
+        <label for="Pat_ID">Patient ID:</label>
+        <input type="text" name="Pat_ID" required>
+        
+        <input type="submit" value="Add Appointment">
+    </form>
+
+    <a href="{{ url_for('appointment_operations') }}">Back to Appointment Operations</a>
+</body>
+</html>
